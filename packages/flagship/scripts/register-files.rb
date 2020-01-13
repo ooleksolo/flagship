@@ -16,8 +16,6 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-p options[:project_path]
-
 project_file = options[:project_path] + '.xcodeproj'
 files = options[:files]
 
@@ -25,11 +23,9 @@ project = Xcodeproj::Project.open(project_file)
 main_target = project.targets.first
 
 files.each do |file|
-  p file
   ref = project.new_file(file)
   file_refs << ref
 end
 
 main_target.add_resources(file_refs)
 project.save(project_file)
-

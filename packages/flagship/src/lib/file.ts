@@ -22,8 +22,6 @@ export const addFilesToXcodeProject = (
     );
   });
 
-  console.log('PATHS: ', regPaths);
-
   spawnSync(
     'ruby',
     [
@@ -38,4 +36,3 @@ export const addFilesToXcodeProject = (
       stdio: 'inherit'
     });
 };
-
