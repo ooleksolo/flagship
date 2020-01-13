@@ -5,6 +5,7 @@ import {
   AxiosResponse
 } from 'axios';
 import { Dictionary } from '@brandingbrand/fsfoundation';
+import { types } from '@brandingbrand/flagship';
 /**
  * Error response object from the network.
  */
@@ -16,7 +17,7 @@ export type FSNetworkError = AxiosError;
  * @see https://github.com/axios/axios#request-config
  */
 export interface FSNetworkRequestConfig extends AxiosRequestConfig {
-  certPaths?: string[];
+  certPaths?: types.PinnedCertificate[];
   // Function that is called to intercept any responses
   responseIntercept?: (response: AxiosResponse) => AxiosResponse;
   // Function that is called to intercept any response errors

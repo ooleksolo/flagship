@@ -1,4 +1,5 @@
 import Axios, { AxiosPromise, AxiosRequestConfig } from 'axios';
+import { types } from '@brandingbrand/flagship';
 import { SSLMethodType, SSLRequest } from './SSLRequest';
 import { FSNetworkRequestConfig } from '../interfaces';
 
@@ -7,7 +8,7 @@ export class SSLPinningInstance {
   private readonly config: FSNetworkRequestConfig;
   private sslRequest: SSLRequest;
 
-  constructor(certificates: string[], config?: FSNetworkRequestConfig) {
+  constructor(certificates: types.PinnedCertificate[], config?: FSNetworkRequestConfig) {
     this.config = { ...this.defaults, ...config };
     this.sslRequest = new SSLRequest(certificates);
   }

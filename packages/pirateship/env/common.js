@@ -6,7 +6,8 @@ module.exports = {
   pinnedCerts: [
     {
       baseUrl: 'https://demo-ocapi.demandware.net',
-      path: 'assets/ssl/cert2.cer'
+      path: 'assets/ssl/cert2.cer',
+      name: 'cert2'
     }
   ],
   buildConfig: {

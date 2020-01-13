@@ -3,6 +3,7 @@ import { FSNetworkRequestConfig } from '../interfaces';
 import { SSLResponse } from './SSLResponse';
 import { SSLError } from './SSLError';
 import { buildURL } from '../utils';
+import { types } from '@brandingbrand/flagship';
 
 type SSLMethods = SSLMethodType;
 
@@ -17,13 +18,10 @@ export class SSLRequest {
 
   private readonly baseRequestOptions: ReactNativeSSLPinning.Options;
 
-  constructor(certificates: string[]) {
-    if (!certificates) {
-      throw new Error('Certificates paths are required for SLL Pinning requests');
-    }
+  constructor(certificates: types.PinnedCertificate[]) {
     this.baseRequestOptions = {
       sslPinning: {
-        certs: certificates
+        certs: certificates.map(cert => cert.name)
       }
     };
   }
@@ -37,7 +35,7 @@ export class SSLRequest {
       throw new Error('URL is required');
     }
 
-    const url = config.params
+    const requestUrl = config.params
       ? buildURL(config.baseURL + config.url, config.params)
       : config.baseURL + config.url;
     try {
@@ -46,7 +44,7 @@ export class SSLRequest {
         jsonBody = JSON.stringify(body);
       }
 
-      const fetchThis = await fetch(url, {
+      const fetchThis = await fetch(requestUrl, {
         ...this.baseRequestOptions,
         ...this.parseConfigToOptions(config, method),
         method,
@@ -67,7 +65,6 @@ export class SSLRequest {
     } else {
       headers = config.headers;
     }
-    // console.log('HEADERS', config.headers);
     return {
       headers: {
         ...headers,
