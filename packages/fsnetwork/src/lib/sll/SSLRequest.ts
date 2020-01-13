@@ -2,6 +2,7 @@ import { fetch, ReactNativeSSLPinning } from 'react-native-ssl-pinning';
 import { FSNetworkRequestConfig } from '../interfaces';
 import { SSLResponse } from './SSLResponse';
 import { SSLError } from './SSLError';
+import { buildURL } from '../utils';
 
 type SSLMethods = SSLMethodType;
 
@@ -17,7 +18,6 @@ export class SSLRequest {
   private readonly baseRequestOptions: ReactNativeSSLPinning.Options;
 
   constructor(certificates: string[]) {
-    console.log('CERTIFICATES: ', certificates);
     if (!certificates) {
       throw new Error('Certificates paths are required for SLL Pinning requests');
     }
@@ -36,16 +36,22 @@ export class SSLRequest {
     if (!config.url) {
       throw new Error('URL is required');
     }
-    const jsonBody = JSON.stringify(body);
+
+    const url = config.params
+      ? buildURL(config.baseURL + config.url, config.params)
+      : config.baseURL + config.url;
     try {
-      const fetchThis = await fetch(config.baseURL + config.url, {
+      let jsonBody: string | undefined;
+      if (body) {
+        jsonBody = JSON.stringify(body);
+      }
+
+      const fetchThis = await fetch(url, {
         ...this.baseRequestOptions,
         ...this.parseConfigToOptions(config, method),
         method,
         body: jsonBody
       });
-
-      console.log('FETCH THIS: ', fetchThis);
 
       return new SSLResponse(fetchThis, config);
     } catch (e) {

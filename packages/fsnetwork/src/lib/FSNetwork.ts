@@ -31,7 +31,6 @@ export class FSNetwork {
 
       let pinnedCertificate;
       if (appEnv && appEnv.pinnedCerts && appEnv.pinnedCerts.length) {
-        console.log('', appEnv.pinnedCerts);
         pinnedCertificate = appEnv.pinnedCerts.filter(
           (item: any) => {
             console.log('item: ', item);

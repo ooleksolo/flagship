@@ -2,7 +2,6 @@ import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ReactNativeSSLPinning } from 'react-native-ssl-pinning';
 import { SSLResponse } from './SSLResponse';
 
-
 export class SSLError implements AxiosError {
   code: string;
   config: AxiosRequestConfig;
@@ -19,8 +18,8 @@ export class SSLError implements AxiosError {
     this.code = data.status && data.status.toString() || 'no status';
     this.config = config;
     this.response = new SSLResponse(data, config);
-    this.message = JSON.parse(data.bodyString).message || '';
-    this.name = JSON.parse(data.bodyString).name || '';
-    this.stack = data.bodyString;
+    this.message = data.bodyString || '';
+    this.name = data.bodyString || '';
+    this.stack = data.bodyString || '';
   }
 }

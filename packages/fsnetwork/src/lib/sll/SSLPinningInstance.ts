@@ -10,7 +10,6 @@ export class SSLPinningInstance {
   constructor(certificates: string[], config?: FSNetworkRequestConfig) {
     this.config = { ...this.defaults, ...config };
     this.sslRequest = new SSLRequest(certificates);
-    console.log(this.defaults);
   }
 
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T> {

@@ -16,7 +16,6 @@ const encode = (val: string) => {
 }
 
 const serialize = (parts: string[]) => (value: any, key: any) => {
-  console.log('PARAMS IN LOOP: ', value)
   if (!value) {
     return;
   }
@@ -37,7 +36,6 @@ const parseValue = (parts: string[], key: any) => (value: any) => {
     value = JSON.stringify(value);
   }
   parts.push(encode(key) + '=' + encode(value));
-  console.log('PARTS:', parts);
 }
 
 export const buildURL = (
@@ -45,8 +43,6 @@ export const buildURL = (
   params: any,
   paramsSerializer?: (params: any) => string
 ) => {
-  console.log('PARAMS TO BUILD: ', params);
-  /*eslint no-param-reassign:0*/
   if (!params) {
     return url;
   }
@@ -55,15 +51,11 @@ export const buildURL = (
 
   let serializedParams;
   if (paramsSerializer) {
-    console.log('PARAMS TO HERE21', params);
     serializedParams = paramsSerializer(params);
   } else if (isURLSearchParams(params)) {
-    console.log('PARAMS TO HERE2', params);
     serializedParams = params.toString();
   } else {
-    console.log('PARAMS TO HERE1', params);
     forEach(params, serialize(parts));
-    console.log('PARAMS TO PARTS: ', parts);
     serializedParams = parts.join('&');
   }
 
@@ -76,7 +68,6 @@ export const buildURL = (
     url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
   }
 
-  console.log('PARAMS BUILD URL: ', url);
   return url;
 };
 
