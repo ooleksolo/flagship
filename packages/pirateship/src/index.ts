@@ -11,6 +11,8 @@ import {
   loadTopCategories
 } from './lib/globalDataLoaders';
 
+console.disableYellowBox = true;
+
 const projectEnv = require('../env/env');
 
 const appConfig: FSAppTypes.AppConfigType = {
@@ -73,6 +75,7 @@ const appConfig: FSAppTypes.AppConfigType = {
           }
         },
         bottomTab: {
+          testID: 'account-tab',
           text: 'Account',
           icon: require('../assets/images/account-tab-icon.png')
         }

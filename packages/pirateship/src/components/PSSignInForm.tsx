@@ -192,6 +192,7 @@ export default class PSSignInForm extends Component<
         placeholderTextColor: variables.color.gray,
         returnKeyType: 'next',
         autoCorrect: false,
+        accessibilityLabel: 'test',
         keyboardType: 'email-address',
         autoCapitalize: 'none',
         onSubmitEditing: () => this.focusField('password')
@@ -289,6 +290,7 @@ export default class PSSignInForm extends Component<
           />
           <PSButton
             title={this.props.signInButtonText || 'Sign In'}
+            accessibilityLabel={'sign-in-button'}
             onPress={this.handleSignInPress}
             loading={isLoading}
             style={styles.button}

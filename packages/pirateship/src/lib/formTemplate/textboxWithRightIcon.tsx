@@ -90,6 +90,7 @@ export function textboxWithRightIcon(locals: {[key: string]: any}): JSX.Element 
             accessibilityLabel={locals.label}
             /* tslint:disable-next-line */
             ref='input'
+            testID={'test-input'}
             onChangeText={locals.onChange}
             onChange={locals.onChangeNative}
             style={textboxStyle}

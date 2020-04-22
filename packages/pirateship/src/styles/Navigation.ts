@@ -155,6 +155,7 @@ export const tabBarDefault: Options = {
     icon: defaultTabImage
   },
   bottomTabs: {
+    testID: 'tab-bar',
     backgroundColor: palette.background,
     hideShadow: false,
     titleDisplayMode: 'alwaysShow',
