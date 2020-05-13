@@ -258,3 +258,7 @@ export interface ShopifyPayment {
   billingAddress: ShopifyAddress;
   creditCard: ShopifyCreditCard;
 }
+
+export interface ShopifyNodeResponse<T = any> {
+  node: T;
+}

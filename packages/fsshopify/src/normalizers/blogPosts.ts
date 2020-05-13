@@ -1,3 +1,5 @@
+import { ShopifyNodeResponse } from '../util/ShopifyResponseTypes';
+
 export interface Article {
   author?: string;
   image?: string;
@@ -10,7 +12,7 @@ export interface Article {
   excerpt?: string;
 }
 
-export function blogPosts(blogData: any): Article | null {
+export function blogPosts(blogData: ShopifyNodeResponse): Article | null {
   if (!(blogData && blogData.node)) {
     return null;
   }

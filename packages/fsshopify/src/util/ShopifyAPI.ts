@@ -16,10 +16,10 @@ export default class ShopifyAPI {
     });
   }
 
-  async postQuery(
+  async postQuery<T = any>(
     query: string,
     variables?: any
-  ): Promise<any> {
+  ): Promise<T> {
     const response = await this.networkClient.post('', {
       query,
       variables

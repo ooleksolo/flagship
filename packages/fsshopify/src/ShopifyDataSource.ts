@@ -33,11 +33,11 @@ export default class ShopifyDataSource extends DataSourceBase
     return Promise.reject(kErrorMessageNotImplemented);
   }
 
-  async addToCart(
+  async addToCart<T = any>(
     productId: string,
     qty?: number,
     product?: FSCommerceTypes.Product
-  ): Promise<any> {
+  ): Promise<T> {
     return Promise.reject(kErrorMessageNotImplemented);
   }
 

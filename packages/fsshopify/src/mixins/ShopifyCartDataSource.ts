@@ -19,6 +19,7 @@ import {
 import { Platform } from 'react-native';
 import FSNetwork from '@brandingbrand/fsnetwork';
 import { Navigator } from '@brandingbrand/fsapp';
+import { PaymentRequestEvent } from '@brandingbrand/react-native-payments';
 
 const kErrorMessageNotImplemented = 'not implemented';
 
@@ -285,7 +286,7 @@ export class ShopifyCartDataSource extends DataSourceBase
     // iOS Only: update shipping address on shopify when its selected
     // provide new shipping options to they paymentRequest
     // @TODO: needs testing
-    paymentRequest.addEventListener('shippingaddresschange', async (e: any) => {
+    paymentRequest.addEventListener('shippingaddresschange', async (e: PaymentRequestEvent) => {
       if (test) {
         console.log('shippingaddresschange', e);
       }
@@ -311,7 +312,7 @@ export class ShopifyCartDataSource extends DataSourceBase
 
     // iOS Only: update shipping method on shopify when its selected
     // @TODO: needs testing
-    paymentRequest.addEventListener('shippingoptionchange', async (e: any) => {
+    paymentRequest.addEventListener('shippingoptionchange', async (e: PaymentRequestEvent) => {
       if (test) {
         console.log('shippingoptionchange', e);
       }
@@ -367,7 +368,7 @@ export class ShopifyCartDataSource extends DataSourceBase
       if (shippingAdded) {
         // wait for shopify to process the shipping address
         // if we request it instantly, shipping methods wont be ready yet
-        await new Promise<any>(resolve => setTimeout(resolve, 2000));
+        await new Promise<void>(resolve => setTimeout(resolve, 2000));
 
         const updatedCheckout = await this.api.getCheckout(checkoutId, true);
         if (updatedCheckout && updatedCheckout.availableShippingRates &&

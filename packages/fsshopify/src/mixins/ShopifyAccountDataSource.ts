@@ -1,4 +1,4 @@
-import { ShopifyAddress } from './../util/ShopifyResponseTypes';
+import { ShopifyAddress, ShopifyNodeResponse } from './../util/ShopifyResponseTypes';
 import { CommerceTypes } from '@brandingbrand/fscommerce';
 import { ShopifyMailingAddressInput } from '..';
 import DataSourceBase from '../util/DataSourceBase';
@@ -122,7 +122,7 @@ export class ShopifyAccountDataSource extends DataSourceBase {
     });
     const customer = response && response.customer;
     const addresses = customer && customer.addresses &&
-      (customer.addresses.edges || []).map((address: any) => {
+      (customer.addresses.edges || []).map((address: ShopifyNodeResponse) => {
         return address.node;
       });
 
@@ -358,7 +358,7 @@ export class ShopifyAccountDataSource extends DataSourceBase {
 
       const blogByHandle = response && response.blogByHandle;
       const articles = blogByHandle && blogByHandle.articles;
-      const data = (articles.edges || []).map((elem: any) => {
+      const data = (articles.edges || []).map((elem: ShopifyNodeResponse) => {
         return Normalizers.blogPosts(elem);
       });
       return data;

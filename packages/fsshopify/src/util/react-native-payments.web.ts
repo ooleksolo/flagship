@@ -17,11 +17,11 @@ export class PaymentRequest implements PaymentRequestInterface {
   onshippingaddresschange: ((
     this: PaymentRequestInterface,
     ev: PaymentRequestEvent
-  ) => any) | null;
+  ) => void) | null;
   onshippingoptionchange: ((
     this: PaymentRequestInterface,
     ev: PaymentRequestEvent
-  ) => any) | null;
+  ) => void) | null;
 
   constructor(
     methodData: PaymentMethodData[],
